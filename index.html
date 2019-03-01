@@ -21,8 +21,10 @@
 
 
     // ProfilePage Component
-    function ProfilePage() {
+    function ProfilePage(props) {
       var profilePageStyle = {
+        display: 'inline-block',
+        margin: 25,
         height: 300,
         width: 200,
         padding: 20,
@@ -32,44 +34,49 @@
       }
       return(
         <div style={profilePageStyle}>
-          <Avatar/>
-          <UserName/>
+          <Avatar img={props.img}/>
+          <UserName name={props.name}/>
           <Social/>
         </div>
       );
     }
 
     // Avatar Component
-    function Avatar() {
+    function Avatar(props) {
       var avatarStyle = {
         marginLeft: 25,
-        marginTop: 10,
+        marginTop: 20,
         width: 150,
         height: 150,
         borderRadius: "80%"
       }
       return(
-        <img src="http://chittagongit.com//images/avatar-icon/avatar-icon-4.jpg" alt="profile pic lost" style={avatarStyle}/>
+        <img src={props.img} alt="avatar" style={avatarStyle}/>
       );
     }
 
 
     // UserName Component
-    function UserName() {
+    function UserName(props) {
       var nameStyle = {
-        fontSize: 25,
+        fontSize: 20,
+        textAlign: "center",
         fontFamily: "Arial, Helvetica",
         margin: 30
       }
       return(
-        <h1 style={nameStyle}>David Chen</h1>
+        <h1 style={nameStyle}>{props.name}</h1>
       );
     }
 
     // Social Component
+
     function Social() {
+      var socialStyle = {
+      marginLeft: 5,
+      }
       return(
-        <div>
+        <div style = {socialStyle}>
           <Like/>
           <Share/>
           <Add/>
@@ -78,7 +85,7 @@
     }
 
       var iconStyle = {
-        margin: 25
+        margin: 20
       }
 
       // Like Component
@@ -103,10 +110,19 @@
       }
 
    ReactDOM.render(
-      <ProfilePage/>,
-      document.getElementById("app")
-   );
+   <div>
+      <ProfilePage name = "a"
+          img = "http://chittagongit.com//images/avatar-icon/avatar-icon-4.jpg"/>
 
+      <ProfilePage name = "b"
+          img = "http://chittagongit.com//images/avatar-icon/avatar-icon-4.jpg"/>
+
+      <ProfilePage name = "c"
+          img = "http://chittagongit.com//images/avatar-icon/avatar-icon-4.jpg"/>
+   </div>,
+
+   document.getElementById("app")
+   );
   </script>
 
 </body>
