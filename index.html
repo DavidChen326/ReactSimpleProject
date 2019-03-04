@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head profile="http://www.w3.org/2005/10/profile">
+<link rel="icon"
+      type="image/png"
+      href="http://example.com/myicon.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -22,22 +25,29 @@
 
     // ProfilePage Component
     function ProfilePage(props) {
-      var profilePageStyle = {
-        display: 'inline-block',
-        margin: 25,
-        height: 300,
-        width: 200,
-        padding: 20,
-        backgroundColor: "#7c76bc",
-        WebkitFilter: "drop-shadow(0px 0px 5px #555)",
-        filter: "drop-shadow(0px 5px 10px #555)"
-      }
+      var people = props.people;
+      var peopleItem = people.map(function(person) {
+
+        //css
+        var profilePageStyle = {
+          display: 'inline-block',
+          margin: 20,
+          height: 300,
+          width: 200,
+          padding: 0,
+          backgroundColor: "#FFF",
+          WebkitFilter: "drop-shadow(0px 0px 5px #555)",
+          filter: "drop-shadow(0px 0px 5px #555)"
+        };
+
+          return <div style={profilePageStyle}>
+            <Avatar img={person.img}/>
+            <UserName name={person.name}/>
+            <Social/>
+          </div>
+      });
       return(
-        <div style={profilePageStyle}>
-          <Avatar img={props.img}/>
-          <UserName name={props.name}/>
-          <Social/>
-        </div>
+        <div>{peopleItem}</div>
       );
     }
 
@@ -109,17 +119,17 @@
         );
       }
 
+      //origin people array
+      var people = [
+        {name:"a", img:"http://chittagongit.com//images/avatar-icon/avatar-icon-4.jpg"},
+        {name:"b", img:"http://chittagongit.com//images/avatar-icon/avatar-icon-4.jpg"},
+        {name:"c", img:"http://chittagongit.com//images/avatar-icon/avatar-icon-4.jpg"}
+        ];
+
    ReactDOM.render(
-   <div>
-      <ProfilePage name = "a"
-          img = "http://chittagongit.com//images/avatar-icon/avatar-icon-4.jpg"/>
-
-      <ProfilePage name = "b"
-          img = "http://chittagongit.com//images/avatar-icon/avatar-icon-4.jpg"/>
-
-      <ProfilePage name = "c"
-          img = "http://chittagongit.com//images/avatar-icon/avatar-icon-4.jpg"/>
-   </div>,
+   <ProfilePage
+    people={people}
+   />,
 
    document.getElementById("app")
    );
