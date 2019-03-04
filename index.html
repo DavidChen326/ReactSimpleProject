@@ -25,8 +25,9 @@
 
     // ProfilePage Component
     function ProfilePage(props) {
-      var people = props.people;
-      var peopleItem = people.map(function(person) {
+      var malePeopleItem = props.people.filter(function(person){
+          return person.gender === "male";
+      }).map(function(person) {
 
         //css
         var profilePageStyle = {
@@ -45,9 +46,39 @@
             <UserName name={person.name}/>
             <Social/>
           </div>
-      });
+        });
+
+        var femalePeopleItem = props.people.filter(function(person){
+          return person.gender === "female";
+      }).map(function(person) {
+
+        //css
+        var profilePageStyle = {
+          display: 'inline-block',
+          margin: 20,
+          height: 300,
+          width: 200,
+          padding: 0,
+          backgroundColor: "#FFF",
+          WebkitFilter: "drop-shadow(0px 0px 5px #555)",
+          filter: "drop-shadow(0px 0px 5px #555)"
+        };
+
+          return <div style={profilePageStyle}>
+            <Avatar img={person.img}/>
+            <UserName name={person.name}/>
+            <Social/>
+          </div>
+        });
+
       return(
-        <div>{peopleItem}</div>
+        <div>
+        <h1>Male</h1>
+        {malePeopleItem}
+        <hr/>
+        <h1>Female</h1>
+        {femalePeopleItem}
+        </div>
       );
     }
 
@@ -121,9 +152,10 @@
 
       //origin people array
       var people = [
-        {name:"a", img:"http://chittagongit.com//images/avatar-icon/avatar-icon-4.jpg"},
-        {name:"b", img:"http://chittagongit.com//images/avatar-icon/avatar-icon-4.jpg"},
-        {name:"c", img:"http://chittagongit.com//images/avatar-icon/avatar-icon-4.jpg"}
+        {id:0, name:"a", gender:"male", img:"http://chittagongit.com//images/avatar-icon/avatar-icon-4.jpg"},
+        {id:1, name:"b", gender:"female", img:"http://chittagongit.com//images/avatar-icon/avatar-icon-4.jpg"},
+        {id:2, name:"c", gender:"female", img:"http://chittagongit.com//images/avatar-icon/avatar-icon-4.jpg"},
+        {id:3, name:"d", gender:"male", img:"http://chittagongit.com//images/avatar-icon/avatar-icon-4.jpg"}
         ];
 
    ReactDOM.render(
